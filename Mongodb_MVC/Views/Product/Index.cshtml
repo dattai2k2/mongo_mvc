@@ -1,9 +1,39 @@
 ﻿@model List<Product>
 <h2>Product List</h2>
 <a href="/Product/Create">Create New</a>
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>@item.Name - <a href="/Product/Delete/@item.Id">Delete</a></li>
-    }
-</ul>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Thời gian thêm mới</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td> @String.Format("{0:MM/dd/yyyy}", @item.CreateDate) </td>
+                <td>
+                    @if (@item.Status == true)
+                    {
+                        <span>Hiển thị</span>
+                    }
+                    else
+                    {
+                        <span>Ẩn</span>
+                    }
+
+                </td>
+                <td><a href="/Product/Delete/@item.Id">Delete</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

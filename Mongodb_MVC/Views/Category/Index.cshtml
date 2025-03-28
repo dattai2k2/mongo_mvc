@@ -1,10 +1,37 @@
 ﻿@model List<Category>
 <h2>Category List</h2>
 <a href="/Category/Create">Create New</a>
-<ul>
-    <li>Tên  - Thời gian thêm mới </li>
-    @foreach (var item in Model)
-    {
-        <li>@item.Name - @item.CreateDate<a href="/Category/Delete/@item.Id">Delete</a></li>
-    }
-</ul>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Thời gian thêm mới</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td> @String.Format("{0:MM/dd/yyyy}", @item.CreateDate) </td>
+                <td>
+                    @if (@item.Status == true)
+                    {
+                        <span>Hiển thị</span>
+                    }
+                    else
+                    {
+                        <span>Ẩn</span>
+                    }
+
+                </td>
+                <td><a href="/Category/Delete/@item.Id">Delete</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

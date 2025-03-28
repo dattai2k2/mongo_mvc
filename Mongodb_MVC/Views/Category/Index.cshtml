@@ -1,5 +1,13 @@
 ﻿@model List<Category>
 <h2>Category List</h2>
+<form class="position-relative col-4" asp-action="Index" method="get">
+    <div class="input-group input-group-merge navbar-input-group ">
+        <input type="search" class="js-form-search form-control" name="text" placeholder="Search..." value="@ViewBag.text">
+        <button>
+            Tìm kiếm
+        </button>
+    </div>
+</form>
 <a href="/Category/Create">Create New</a>
 <table class="table table-bordered">
     <thead>
@@ -29,7 +37,7 @@
                     }
 
                 </td>
-                <td><a href="/Category/Delete/@item.Id">Delete</a></td>
+                <td><a href="/Category/Update/@item.Id">Update</a>  &nbsp; &nbsp;<a href="/Category/Delete/@item.Id">Delete</a></td>
             </tr>
         }
 

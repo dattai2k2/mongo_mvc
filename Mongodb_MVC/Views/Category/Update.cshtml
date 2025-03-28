@@ -1,0 +1,34 @@
+﻿@model Category
+
+<h2>Update Category</h2>
+
+<form asp-action="Update" method="post">
+    <div>
+        <label>Name:</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Trạng thái</label>
+        <div class="col-4">
+            <div class="input-group input-group-sm-down-break ">
+                <div class="form-control">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" asp-for="Status" value="false" name="Status" id="userAccountTypeRadio1">
+                        <label class="custom-control-label" for="userAccountTypeRadio1">Ẩn</label>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" asp-for="Status" value="true" name="Status" id="userAccountTypeRadio2">
+                        <label class="custom-control-label" for="userAccountTypeRadio2">Hiển thị</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input asp-for="CreateDate" class="form-control d-none" />
+    <br>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="/Category" class="btn btn-secondary">Back</a>
+</form>

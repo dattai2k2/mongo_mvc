@@ -14,8 +14,10 @@ namespace Mongodb_MVC.Controllers
             _mongoDBService = mongoDBService;
         }
 
-        public async Task<IActionResult> Index() => View(await _mongoDBService.GetCategoriesAsync());
-
+        public async Task<IActionResult> Index(string text)
+        {
+            return View(await _mongoDBService.SearchCategoriesAsync(text));
+        }
         public IActionResult Create() => View();
 
         [HttpPost]
@@ -23,11 +25,26 @@ namespace Mongodb_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 category.CreateDate = DateTime.Now;
                 await _mongoDBService.AddCategoryAsync(category);
+
                 return RedirectToAction("Index");
             }
             return View(category);
+        }
+        public async Task<IActionResult> Update(string id)
+        {
+            Category category = await _mongoDBService.GetCategoryByIdAsync(id);
+
+            return View(category);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(Category category)
+        {
+            await _mongoDBService.UpdateCategoryAsync(category.Id, category);
+
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(string id)

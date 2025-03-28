@@ -11,7 +11,6 @@ namespace Mongodb_MVC.Models
 
         public string Name { get; set; } = string.Empty;
         public DateTime? CreateDate { get; set; }
-        public DateTime? UpdateDate { get; set; }
         public bool Status { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string CategoryId { get; set; } = string.Empty;

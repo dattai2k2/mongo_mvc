@@ -13,11 +13,13 @@ namespace Mongodb_MVC.Controllers
             _mongoDBService = mongoDBService;
         }
 
-        public async Task<IActionResult> Index() => View(await _mongoDBService.GetProductsAsync());
-
+        public async Task<IActionResult> Index(string text)
+        {
+            return View(await _mongoDBService.SearchProductsAsync(text));
+        }
         public async Task<IActionResult> Create()
         {
-            ViewBag.Categories = await _mongoDBService.GetCategoriesAsync();
+            ViewBag.Categories = await _mongoDBService.GetCategoriesByStatusAsync();
             return View();
         }
 
@@ -33,7 +35,19 @@ namespace Mongodb_MVC.Controllers
             ViewBag.Categories = await _mongoDBService.GetCategoriesAsync();
             return View(product);
         }
+        public async Task<IActionResult> Update(string id)
+        {
+            Product product = await _mongoDBService.GetProductByIdAsync(id);
+            ViewBag.Categories = await _mongoDBService.GetCategoriesByStatusAsync();
+            return View(product);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(Product product)
+        {
+            await _mongoDBService.UpdateProductAsync(product.Id, product);
 
+            return RedirectToAction("Index");
+        }
         public async Task<IActionResult> Delete(string id)
         {
             await _mongoDBService.DeleteProductAsync(id);

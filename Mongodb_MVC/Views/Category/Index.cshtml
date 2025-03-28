@@ -2,8 +2,9 @@
 <h2>Category List</h2>
 <a href="/Category/Create">Create New</a>
 <ul>
+    <li>Tên  - Thời gian thêm mới </li>
     @foreach (var item in Model)
     {
-        <li>@item.Name - <a href="/Category/Delete/@item.Id">Delete</a></li>
+        <li>@item.Name - @item.CreateDate<a href="/Category/Delete/@item.Id">Delete</a></li>
     }
 </ul>

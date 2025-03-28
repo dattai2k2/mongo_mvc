@@ -26,6 +26,7 @@ namespace Mongodb_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                product.CreateDate = DateTime.Now;
                 await _mongoDBService.AddProductAsync(product);
                 return RedirectToAction("Index");
             }

@@ -23,6 +23,7 @@ namespace Mongodb_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.CreateDate = DateTime.Now;
                 await _mongoDBService.AddCategoryAsync(category);
                 return RedirectToAction("Index");
             }

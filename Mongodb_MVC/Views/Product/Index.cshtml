@@ -1,0 +1,9 @@
+﻿@model List<Product>
+<h2>Product List</h2>
+<a href="/Product/Create">Create New</a>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.Name - <a href="/Product/Delete/@item.Id">Delete</a></li>
+    }
+</ul>
